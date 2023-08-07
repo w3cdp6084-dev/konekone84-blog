@@ -85,15 +85,24 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+:root {
+    /* ライトモードのデフォルトカラー */
+    --background-color: #ffffff;
+    --text-color: #000000;
 }
+
+[data-theme="dark"] {
+    /* ダークモードのカラー */
+    --background-color: #000000;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 a {
   color: inherit;
