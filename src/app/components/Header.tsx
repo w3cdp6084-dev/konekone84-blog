@@ -1,39 +1,57 @@
-import { Box, Flex, Heading, Button } from "./common";
-import NextLink from "next/link";
+'use client'
 
-export default function Header() {
-    return (
-        <Box as="header">
-            <Flex
-                bg="white"
-                color="gray.600"
-                py={{ base: 2 }}
-                px={{ base: 4 }}
-                borderBottom={1}
-                borderStyle="solid"
-                borderColor="gray.200"
-                align="center"
-                minH={"60px"} // Added minH prop
-            >
-                <Flex flex={1} justify="space-between" maxW="5xl" mx="auto">
-                    <Heading as="h1" size="lg">
-                        <NextLink href="/">Blog App</NextLink>
-                    </Heading>
-                    <Button
-                        as={NextLink}
-                        fontSize="sm"
-                        fontWeight={600}
-                        color="white"
-                        bg="orange.400"
-                        href="/articles/new"
-                        _hover={{
-                            bg: "orange.300",
-                        }}
-                    >
-                        記事を書く
-                    </Button>
-                </Flex>
-            </Flex>
-        </Box>
-    );
+import {
+  Box,
+  Flex,
+  Button,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+  useColorMode,
+} from "./common";
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+
+interface Props {
+  children: React.ReactNode
+}
+
+const NavLink = (props: Props) => {
+  const { children } = props
+
+  return (
+    <Box
+      as="a"
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: useColorModeValue('gray.200', 'gray.700'),
+      }}
+      href={'#'}>
+      {children}
+    </Box>
+  )
+}
+
+export default function Nav() {
+  const { colorMode, toggleColorMode } = useColorMode()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  return (
+    <>
+      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <Box>Logo</Box>
+
+          <Flex alignItems={'center'}>
+            <Stack direction={'row'} spacing={7}>
+              <Button onClick={toggleColorMode}>
+                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              </Button>
+            </Stack>
+          </Flex>
+        </Flex>
+      </Box>
+    </>
+  )
 }
