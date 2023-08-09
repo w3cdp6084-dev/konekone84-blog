@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Provider from "./Provider";
 import Header from "./components/Header";
-import { Navbar } from "./components/Navbar.client";
+import "./sass/reset.scss"
 const inter = Inter({ subsets: ['latin'] })
 
 const config = {
