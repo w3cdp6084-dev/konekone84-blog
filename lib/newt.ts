@@ -1,6 +1,6 @@
 import { createClient } from 'newt-client-js'
 import 'server-only'
-import type { Article } from '../types/article'
+import type { Article, Category } from '../types/article'
 import { cache } from 'react'
 const client = createClient({
   spaceUid: process.env.NEWT_SPACE_UID + '',
@@ -10,23 +10,35 @@ const client = createClient({
 
 
 export const getArticles = cache(async () => {
-    const { items } = await client.getContents<Article>({
-        appUid: 'blog',
-        modelUid: 'article',
-        query: {
-            select: ['_id', 'title', 'slug', 'body'],
-        },
-    })
-    return items
-})
+  const { items } = await client.getContents<Article>({
+    appUid: 'blog',
+    modelUid: 'article',
+    query: {
+      select: ['_id', 'title', 'slug', 'body', 'meta', 'coverImage', 'ogImage', 'createdAt', 'categories'],
+    },
+  });
+  return items;
+});
+
 export const getArticleBySlug = cache(async (slug: string) => {
     const article = await client.getFirstContent<Article>({
       appUid: 'blog',
       modelUid: 'article',
       query: {
         slug,
-        select: ['_id', 'title', 'slug', 'body'],
+        select: ['_id', 'title', 'slug', 'body', 'meta', 'coverImage', 'ogImage', 'createdAt', 'category'],
       },
     })
     return article
   })
+  export const getCategories = cache(async () => {
+    const { items } = await client.getContents<Category>({
+      appUid: 'blog', 
+      modelUid: 'category', 
+      query: {
+        select: ['_id', 'name', 'slug'], 
+      },
+    })
+    return items
+  })
+  
