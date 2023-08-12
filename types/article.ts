@@ -1,4 +1,5 @@
 export type Article = {
+  date: string;
   categories: any;
   category: string;
   body: string | TrustedHTML;
@@ -32,6 +33,7 @@ export type Article = {
     };
   body: string;
 }
+createdAt: string;
 };
 
 export type Category = {
