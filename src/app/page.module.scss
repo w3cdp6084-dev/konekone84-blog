@@ -227,3 +227,45 @@
     transform: rotate(0deg);
   }
 }
+/* 一旦ここにスタイル記載 */
+// カード一覧
+.CardList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+}
+.Card{
+  border-radius: 14px;
+  transform: translateY(0px);
+  transition: 1s all;
+}
+.Card:hover{
+  transform: scale(1.1);
+}
+.CardInner{
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  padding: 20px;
+  max-width: inherit;
+  width: fit-content;
+  background: #fff;
+  color: #474747;
+  margin: 0 auto;
+  display: inline-block;
+  transition: 0.4s;
+  h3{
+    width: calc(100% - 80px);
+    margin: 0 auto;
+  }
+}
+.CardInnerImg{
+  max-width: 100%;
+  text-align: center;
+  img{
+    width: 160px;
+    margin: 0 auto;
+  }
+}
