@@ -9,11 +9,12 @@ const client = createClient({
 })
 
 
-export const getArticles = cache(async () => {
+export const getArticles = cache(async (limit = 9) => {
   const { items } = await client.getContents<Article>({
     appUid: 'blog',
     modelUid: 'article',
     query: {
+      limit,
       select: ['_id', 'title', 'slug', 'body', 'meta', 'coverImage', 'ogImage', 'date', 'categories'],
     },
   });
