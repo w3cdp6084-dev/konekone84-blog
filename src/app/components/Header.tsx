@@ -22,11 +22,10 @@ import { FaBars as HamburgerIcon, FaTimes as CloseIcon } from 'react-icons/fa';
 interface Props {
   children: React.ReactNode
 }
+import Link from 'next/link';
 
-const NavLink = (props: Props) => {
-  const { children } = props
-
-  return (
+const NavLink = ({ children, href }: { children: React.ReactNode; href: string }) => (
+  <Link href={href} passHref>
     <Box
       as="a"
       px={2}
@@ -35,18 +34,22 @@ const NavLink = (props: Props) => {
       _hover={{
         textDecoration: 'none',
         bg: useColorModeValue('gray.200', 'gray.700'),
-      }}
-      href={'#'}>
+      }}>
       {children}
     </Box>
-  )
-}
+  </Link>
+);
+
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const menuItems = ["Home", "About", "Contact", "Services"];
+  const menuItems = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "List", href: "/list" },
+  ];
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -74,11 +77,13 @@ export default function Nav() {
             <DrawerCloseButton />
             <DrawerHeader>Navigation</DrawerHeader>
             <DrawerBody>
-              {menuItems.map((item, index) => (
-                <Button key={index} w="100%" my={2} onClick={onClose}>
-                  {item}
-                </Button>
-              ))}
+            {menuItems.map((item, index) => (
+            <NavLink key={index} href={item.href}>
+              <Button w="100%" my={2} onClick={onClose}>
+                {item.name}
+              </Button>
+            </NavLink>
+          ))}
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
