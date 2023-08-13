@@ -15,14 +15,15 @@ import {
   DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
-
 } from "./common";
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { FaBars as HamburgerIcon, FaTimes as CloseIcon } from 'react-icons/fa';
-interface Props {
-  children: React.ReactNode
-}
 import Link from 'next/link';
+import { ChangeEvent } from "react";
+
+interface NavProps {
+  onSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
 const NavLink = ({ children, href }: { children: React.ReactNode; href: string }) => (
   <Link href={href} passHref>
@@ -55,7 +56,6 @@ export default function Nav() {
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'flex-end'}>
           <Box>Logo</Box>
-
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>

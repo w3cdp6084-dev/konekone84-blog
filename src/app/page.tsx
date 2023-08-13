@@ -18,7 +18,7 @@ export default async function Home() {
     <main className={styles.main}>
     <ul className={styles.CardList}>
       {articles.map((article) => {
-        const relatedCategories = article.categories.map((categoryObj) =>
+        const relatedCategories = article.categories.map((categoryObj: { _id: string }) =>
           categories.find((cat) => cat._id === categoryObj._id)
         );
         const formattedDate = format(new Date(article.date), 'yyyy-MM-dd');
@@ -33,7 +33,7 @@ export default async function Home() {
                   )}
                 </div>
                 <h3>{article.title}</h3>
-                <p>{relatedCategories.map((cat) => cat?.name).join(", ")}</p>
+                <p>{relatedCategories.map((cat: { name: any }) => cat?.name).join(", ")}</p>
                 <p>{formattedDate}</p>
               </div>
             </Link>
