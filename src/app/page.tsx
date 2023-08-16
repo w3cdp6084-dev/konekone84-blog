@@ -33,8 +33,10 @@ export default async function Home() {
                   )}
                 </div>
                 <h3>{article.title}</h3>
-                <p>{relatedCategories.map((cat: { name: any }) => cat?.name).join(", ")}</p>
-                <p>{formattedDate}</p>
+                <div className={styles.note}>
+                  <p className={styles.category}>{relatedCategories.map((cat: { name: any }) => cat?.name).join(", ")}</p>
+                  <p className={styles.date}>{formattedDate}</p>
+                </div>
               </div>
             </Link>
           </li>

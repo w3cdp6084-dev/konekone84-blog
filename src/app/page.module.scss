@@ -5,6 +5,8 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background-image: url('../../public/bg.jpeg');
+  background-size: cover;
 }
 
 .description {
@@ -241,6 +243,8 @@
   border-radius: 14px;
   transform: translateY(0px);
   transition: 1s all;
+  width: 30%;
+  margin-bottom: 20px;
 }
 .Card:hover{
   transform: scale(1.1);
@@ -259,6 +263,21 @@
   h3{
     width: calc(100% - 80px);
     margin: 12px auto 0;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .note{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 80px);
+    margin: 12px auto 0;
+  }
+  .category{
+    font-size: 0.8rem;
+  }
+  .date{
+    font-size: 0.8rem;
   }
 }
 .CardInnerImg{
