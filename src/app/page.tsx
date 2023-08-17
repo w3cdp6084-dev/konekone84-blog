@@ -1,9 +1,12 @@
+
 import Link from 'next/link'
 import { getArticles, getCategories } from '../../lib/newt'
 import styles from '@/app/page.module.scss'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { format } from 'date-fns';
+import PageTransition from './components/PageTransition';
+import { useClientPath } from './hooks/useClientPath';
 
 export const metadata: Metadata = {
   title: 'Newt・Next.jsブログ',
@@ -13,8 +16,10 @@ export const metadata: Metadata = {
 export default async function Home() {
   const articles = await getArticles(9);
   const categories = await getCategories();
+  const path = typeof window !== 'undefined' ? useClientPath() : '';
 
   return (
+    <PageTransition path={path}>
     <main className={styles.main}>
     <ul className={styles.CardList}>
       {articles.map((article) => {
@@ -44,5 +49,6 @@ export default async function Home() {
       })}
     </ul>
   </main>
+  </PageTransition>
   );
 }
