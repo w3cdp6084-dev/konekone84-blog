@@ -1,14 +1,11 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import ThreeBackground from './components/ThreeBackground';
 import './globals.css';
-import { Inter } from 'next/font/google';
 import Provider from "./Provider";
 import Header from "./components/Header";
 import "./sass/reset.scss";
 import LoadingAnimation from './components/LoadingAnimation';
-
-const inter = Inter({ subsets: ['latin'] });
+import Scene from "./components/Scene";
 
 const config = {
   initialColorMode: "light",
@@ -31,9 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingAnimation />
         ) : (
           <Provider>
-            <ThreeBackground />
+
             <Header />
             {children}
+            <Scene />
           </Provider>
         )}
       </body>
