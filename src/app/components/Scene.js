@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Instances, Instance, Environment } from '@react-three/drei'
 import { EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
+import { useColorMode } from '@chakra-ui/react';
 
 const particles = Array.from({ length: 72 }, () => ({
   factor: MathUtils.randInt(20, 100),
@@ -43,10 +44,12 @@ function Bubble({ factor, speed, xFactor, yFactor, zFactor }) {
 }
 
 export default function Scene() {
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === 'dark';
   return (
     <div className="background-container">
         <Canvas shadows dpr={[1, 2]} gl={{ antialias: false }} camera={{ fov: 250, position: [0, 0, 20] }}>
-            <color attach="background" args={['#f0f0f0']} />
+            <color attach="background" args={isDarkMode ? ['#000'] : ['#f0f0f0']} />
             <fog attach="fog" args={['gray', 20, -5]} />
             <ambientLight intensity={1.5} />
             <pointLight position={[10, 10, 10]} intensity={1} castShadow />
