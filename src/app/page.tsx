@@ -48,6 +48,9 @@ export default async function Home() {
         );
       })}
     </ul>
+    <Link href="./list">
+      <button className={styles.moreButton}>More Articles</button>
+    </Link>
   </main>
   </PageTransition>
   );
