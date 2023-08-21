@@ -17,6 +17,8 @@ export type Article = {
     };
   };
   title: string;
+  subtitleh2: string;
+  subtitleh3: string;
   slug: string;
   meta:{
     coverImage: any;
