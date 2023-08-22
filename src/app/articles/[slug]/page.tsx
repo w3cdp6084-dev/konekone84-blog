@@ -3,12 +3,10 @@ import type { Metadata } from 'next'
 import type { Article } from '../../../../types/article'
 import PageTransition from '../../components/PageTransition';
 import { useClientPath } from '../../hooks/useClientPath';
-import { TableOfContents, Header } from '../../components/TableOfContents';
 type Props = {
   params: {
     slug: string
   },
-  headers: Header[];
 }
 
 export async function generateStaticParams() {
@@ -29,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article({ params, headers }: Props) {
+export default async function Article({ params }: Props) {
   const { slug } = params
   const article = await getArticleBySlug(slug)
   if (!article) return
@@ -41,7 +39,6 @@ export default async function Article({ params, headers }: Props) {
       <h2 id="section1">{article.subtitleh2}</h2>
       <h3 id="section1-subsection1">{article.subtitleh3}</h3>
       <div dangerouslySetInnerHTML={{ __html: article.body }} />
-      <TableOfContents headers={headers} />
     </main>
     </PageTransition>
   )
