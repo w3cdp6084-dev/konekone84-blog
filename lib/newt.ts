@@ -1,5 +1,4 @@
 import { createClient } from 'newt-client-js'
-import 'server-only'
 import type { Article, Category } from '../types/article'
 import { cache } from 'react'
 const client = createClient({

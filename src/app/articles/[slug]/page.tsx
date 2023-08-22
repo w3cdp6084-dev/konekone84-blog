@@ -3,11 +3,12 @@ import type { Metadata } from 'next'
 import type { Article } from '../../../../types/article'
 import PageTransition from '../../components/PageTransition';
 import { useClientPath } from '../../hooks/useClientPath';
-import { TableOfContents, Header } from '../../components/TableOfContents'; // 中括弧を使用して明示的にインポート
+import { TableOfContents, Header } from '../../components/TableOfContents';
 type Props = {
   params: {
     slug: string
-  }
+  },
+  headers: Header[]; // headers プロパティを追加
 }
 
 export async function generateStaticParams() {
@@ -28,15 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article({ params }: Props) {
+export default async function Article({ params, headers }: Props) { // headers プロパティを受け取るように修正
   const { slug } = params
   const article = await getArticleBySlug(slug)
   if (!article) return
   const path = typeof window !== 'undefined' ? useClientPath() : '';
-  const headers: Header[] = [
-    { id: "section1", text: article.subtitleh2 },
-    { id: "section1-subsection1", text: article.subtitleh3 },
-  ];
   return (
     <PageTransition path={path}>
     <main>
@@ -44,7 +41,7 @@ export default async function Article({ params }: Props) {
       <h2 id="section1">{article.subtitleh2}</h2>
       <h3 id="section1-subsection1">{article.subtitleh3}</h3>
       <div dangerouslySetInnerHTML={{ __html: article.body }} />
-      <TableOfContents headers={headers} />
+      <TableOfContents headers={headers} /> {/* headers プロパティを渡す */}
     </main>
     </PageTransition>
   )
