@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
-import { getArticleBySlug } from '../../../lib/newt'; // newt パッケージをインポート
-import type { Article } from '../../../types/article'; // Article 型をインポート
+import { getArticleBySlug } from '../../../lib/newt';
+import type { Article } from '../../../types/article';
 
 export type Header = {
   id: string;
@@ -9,15 +9,15 @@ export type Header = {
 };
 
 type Props = {
-  slug: string; // スラッグをプロパティとして追加
+  slug: string;
 };
 
 const TableOfContents: React.FC<Props> = ({ slug }) => {
-  const [article, setArticle] = React.useState<Article | null>(null); // 記事を状態として追加
+  const [article, setArticle] = React.useState<Article | null>(null);
   const headers: Header[] = [];
   React.useEffect(() => {
     const fetchArticle = async () => {
-      const result = await getArticleBySlug(slug); // 記事を取得
+      const result = await getArticleBySlug(slug);
       setArticle(result);
     };
     fetchArticle();
@@ -40,7 +40,7 @@ const TableOfContents: React.FC<Props> = ({ slug }) => {
           </li>
         ))}
       </ul>
-      <div dangerouslySetInnerHTML={{ __html: article?.body.toString() || '' }} /> {/* 文字列に変換する */}
+      <div dangerouslySetInnerHTML={{ __html: article?.body.toString() || '' }} />
     </nav>
   );
 };

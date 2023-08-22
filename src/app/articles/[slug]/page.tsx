@@ -8,7 +8,7 @@ type Props = {
   params: {
     slug: string
   },
-  headers: Header[]; // headers プロパティを追加
+  headers: Header[];
 }
 
 export async function generateStaticParams() {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Article({ params, headers }: Props) { // headers プロパティを受け取るように修正
+export default async function Article({ params, headers }: Props) {
   const { slug } = params
   const article = await getArticleBySlug(slug)
   if (!article) return
@@ -41,7 +41,7 @@ export default async function Article({ params, headers }: Props) { // headers �
       <h2 id="section1">{article.subtitleh2}</h2>
       <h3 id="section1-subsection1">{article.subtitleh3}</h3>
       <div dangerouslySetInnerHTML={{ __html: article.body }} />
-      <TableOfContents headers={headers} /> {/* headers プロパティを渡す */}
+      <TableOfContents headers={headers} />
     </main>
     </PageTransition>
   )

@@ -5,7 +5,6 @@ import Provider from "./Provider";
 import Header from "./components/Header";
 import "./sass/reset.scss";
 import LoadingAnimation from './components/LoadingAnimation';
-import Scene from "./components/Scene";
 
 const config = {
   initialColorMode: "light",
@@ -28,10 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LoadingAnimation />
         ) : (
           <Provider>
-
             <Header />
             {children}
-            <Scene />
           </Provider>
         )}
       </body>
