@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import type { Article } from '../../../../types/article'
 import PageTransition from '../../components/PageTransition';
 import { useClientPath } from '../../hooks/useClientPath';
+import ShareButtons from '../../components/ShareButtons';
+
 type Props = {
   params: {
     slug: string
@@ -39,6 +41,7 @@ export default async function Article({ params }: Props) {
       <h2 id="section1">{article.subtitleh2}</h2>
       <h3 id="section1-subsection1">{article.subtitleh3}</h3>
       <div dangerouslySetInnerHTML={{ __html: article.body }} />
+      <ShareButtons url="https://yourwebsite.com" title="Your Website Title" />
     </main>
     </PageTransition>
   )
