@@ -50,7 +50,7 @@ export default async function Article({ params }: Props) {
     <PageTransition path={path}>
     <main>
       <h1>{article.title}</h1>
-      <div>
+      <div className='tableOdContents'>
         <h2>Table Of Contents</h2>
         <ol>
           {headings.map((text, index) => {
