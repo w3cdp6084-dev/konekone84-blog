@@ -25,9 +25,11 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "algoliasearch": "^4.19.1",
+    "cheerio": "^1.0.0-rc.12",
     "date-fns": "^2.30.0",
     "framer-motion": "^6.5.1",
     "gsap": "^3.12.2",
+    "highlight.js": "^11.8.0",
     "newt-client-js": "^3.2.6",
     "next": "^13.4.12",
     "react": "18.2.0",
@@ -40,8 +42,9 @@
     "sass": "^1.64.1",
     "server-only": "^0.0.1",
     "three": "^0.155.0",
-    "typescript": "5.1.6",
-    "unist-util-visit": "^5.0.0"
+    "tocbot": "^4.21.1",
+    "typescript": "5.1.6"
+
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.2.0",

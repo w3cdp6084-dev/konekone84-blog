@@ -4,9 +4,8 @@ import type { Article } from '../../../../types/article'
 import PageTransition from '../../components/PageTransition';
 import { useClientPath } from '../../hooks/useClientPath';
 import ShareButtons from '../../components/ShareButtons';
-import TableOfContents from '../../components/TableOfContents'; // Import the TableOfContents component
-import remark from 'remark';
-import visit from 'unist-util-visit';
+import { load } from 'cheerio'
+
 
 type Props = {
   params: {
@@ -43,15 +42,37 @@ export default async function Article({ params }: Props) {
   const article = await getArticleBySlug(slug)
   if (!article) return
   const path = typeof window !== 'undefined' ? useClientPath() : '';
-  
+  if (!article) return
+  const headings: string[] = []
+  const $ = load(article.body.toString()) // 1
+ $('h2').each((_, elm) => { // 2
+   const text = $(elm).text() // 3
+   headings.push(text)
+   $(elm).contents().wrap(`<a id="${text}" href="#${text}"></a>`) // 4
+ })
+ article.body = $.html() // 5
+
   return (
     <PageTransition path={path}>
-      <main>
-        <h1>{article.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: article.body }} />
-        <TableOfContents sections={article.headings} /> {/* Use the extracted headings */}
-        <ShareButtons url="https://yourwebsite.com" title="Your Website Title" />
-      </main>
+    <main>
+      <h1>{article.title}</h1>
+      <div className='tableOdContents'>
+        <h2>Table Of Contents</h2>
+        <ol>
+          {headings.map((text, index) => {
+            return (
+              <li key={index}>
+                <a href={`#${text}`}>{text}</a>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+      <h2 id="section1">{article.subtitleh2}</h2>
+      <h3 id="section1-subsection1">{article.subtitleh3}</h3>
+      <div dangerouslySetInnerHTML={{ __html: article.body }} />
+      <ShareButtons url="https://yourwebsite.com" title="Your Website Title" />
+    </main>
     </PageTransition>
   )
 }
