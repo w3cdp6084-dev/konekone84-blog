@@ -4,14 +4,20 @@ import type { Article } from '../../../../types/article'
 import PageTransition from '../../components/PageTransition';
 import { useClientPath } from '../../hooks/useClientPath';
 import ShareButtons from '../../components/ShareButtons';
-import TableOfContents from '../../components/TableOfContents';
 import { load } from 'cheerio'
+
 
 type Props = {
   params: {
     slug: string
   },
 }
+
+// Define the Section type
+type Section = {
+  id: string;
+  title: string;
+};
 
 export async function generateStaticParams() {
   const articles = await getArticles()
